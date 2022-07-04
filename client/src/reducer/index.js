@@ -10,6 +10,7 @@ switch(action.type){
             ...state,
             countries:action.payload
         }
+    default: return state;
 }
 }
 export default rootReducer;

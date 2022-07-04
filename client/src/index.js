@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; //para conectarme con el store
 import { store } from './store';
+import { BrowserRouter } from 'react-router-dom';
 //nunca olvidar envolver la aplicacion en provider sino redux no reconoce nada store 
 
 ReactDOM.render(
   <Provider store={store}> 
-    <React.StrictMode>
+    <BrowserRouter>
       <App />
-    </React.StrictMode>
+    </BrowserRouter>
 </Provider>,
 document.getElementById('root')
 );
