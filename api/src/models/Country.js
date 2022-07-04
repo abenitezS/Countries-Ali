@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     },
     bandera:{ 
       type: DataTypes.TEXT, 
-      validate: {isUrl: true},
+     // validate: {isUrl: true},
       allowNull: false,
     },
     continent:{
