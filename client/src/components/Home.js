@@ -8,7 +8,7 @@ import Card from '../components/Card'
 export default function Home(){
   const dispatch= useDispatch() //para ir despachando mis acciones 
     // esta hook es lo mismo que hacer mapdispatchToProps y traerme los prop es mas directo
-  const allCountries= useSelector((state)=>state.countriesall)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
+  const allCountries= useSelector(state=>state.countriesall)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
     // traerme del estado cuando se monte los Paises , es lo mismo que hacer componentDidMount 
   useEffect( () => {  dispatch(getCountries()); // es lo mismo que hacer mapDispatchToProps
     },[dispatch] );//mientras este un estado o dependencia, como no depende de nada se monta sin problema

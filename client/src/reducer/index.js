@@ -2,16 +2,14 @@
     countriesall : []
    }
 
-   export const rootReducer  = (state = initialState, action) => {
-    switch(action.type){
-
-        case 'GET_COUNTRIES':
-            return ({
+function  rootReducer (state = initialState, action) {
+    if (action.type==='GET_COUNTRIES'){ 
+            return {
                 ...state,
-                countriesall: action.payload,
-               
-            })
+                countriesall: action.payload,              
+            }
+        }
+     return state;
 
-    default: return state;
 }
-}
+export default rootReducer;
