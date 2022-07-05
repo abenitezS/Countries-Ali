@@ -2,19 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Provider } from 'react-redux'; //para conectarme con el store
-import { store } from './store';
+import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-//nunca olvidar envolver la aplicacion en provider sino redux no reconoce nada store 
+import store from './store/index.js'
+
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <React.StrictMode>
+//         <App />
+//       </React.StrictMode>
+//     </BrowserRouter>
+//   </Provider>,
+//   document.getElementById('root')
+// );
+
+
 
 ReactDOM.render(
-  <Provider store={store}> 
+  <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
     </BrowserRouter>
-</Provider>,
-document.getElementById('root')
+  </Provider>,
+  document.getElementById('root')
 );
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitalsreportWebVitals();
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
