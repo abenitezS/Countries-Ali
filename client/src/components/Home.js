@@ -29,7 +29,7 @@ export default function Home(){
               Volver a cargar 
           </button>
         <div>
-            <select>
+          <select>
             <option value='asc'>Ascedente</option>
             <option value='desc'>Descedente</option>   
            </select>
