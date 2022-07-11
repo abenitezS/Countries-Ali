@@ -4,12 +4,27 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getCountries} from '../actions'
 import {Link} from 'react-router-dom'
 import Card from '../components/Card'
+import Paginado from './Paginado'
 
 export default function Home(){
   const dispatch= useDispatch() //para ir despachando mis acciones 
     // esta hook es lo mismo que hacer mapdispatchToProps y traerme los prop es mas directo
   const allCountries= useSelector(state=>state.countriesall)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
     // traerme del estado cuando se monte los Paises , es lo mismo que hacer componentDidMount 
+  
+  //estados para el paginado 
+const[currentPage,setCurrentPage]=useState(1)  // mi pagina actual que arranca en 1
+const[countriesPerPage,setCountriesPerPage]=useState(9) // paises por pagina siempre seran 9
+const indexOfLastCountries=currentPage * countriesPerPage //9
+const indexOfFirstCountries= indexOfLastCountries - countriesPerPage //0
+const currentCountries=allCountries.slice(indexOfFirstCountries,indexOfLastCountries)// me da los paises para mi pagina actual
+
+const paginado = (pageNumber)=>{  // me va a servit para el renderizado
+  setCurrentPage(pageNumber)
+}
+
+
+
   useEffect( () => {  dispatch(getCountries()); // es lo mismo que hacer mapDispatchToProps
     },[dispatch] );//mientras este un estado o dependencia, como no depende de nada se monta sin problema
     //para prevenite errores que me renderice la pagina si toco volver a cargar
@@ -39,9 +54,12 @@ export default function Home(){
             <option value='name'>Alfabeticamente</option>
             <option value='Population'>Cantidad de Poblacion </option>
           </select>
-          {
-            allCountries?.map((e) => {
-
+          <Paginado
+          countriesPerPage={countriesPerPage}
+          allCountries={allCountries.length}
+          paginado={paginado}
+          />
+          {currentCountries?.map((e) => {
               return (
                 <fragment>
                   <Link to={"/home/"+ e.idCountry }>
