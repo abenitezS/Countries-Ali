@@ -7,3 +7,13 @@ export function getCountries(){
         })
     }
 }
+
+export function filterCountriesByContinent(payload){
+    console.log(payload)
+    return {
+        
+        type:'FILTER_BY_CONTINENT',
+         payload
+        }
+
+}
