@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getCountries,filterCountriesByContinent, ordersByPopulation} from '../actions'
+import {getCountries,filterCountriesByContinent, ordersByPopulation, OrderByName} from '../actions'
 import {Link} from 'react-router-dom'
 import Card from '../components/Card'
 import Paginado from './Paginado'
@@ -39,13 +39,23 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
   function  handelfilterContinent(e){
     e.preventDefault()
     dispatch(filterCountriesByContinent(e.target.value));
+    setCurrentPage(1);
+   
   }
    
+  function  handleOrderByName(e){
+    e.preventDefault()
+    dispatch(OrderByName(e.target.value));
+    setCurrentPage(1);
+    
+  }
+
   function  handelOrderPopulation(e){
     e.preventDefault()
     dispatch(ordersByPopulation());
-  }
    
+  }
+  
 
     //renderizamos 
       return(  
@@ -58,10 +68,7 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
               Volver a cargar 
           </button>
         <div>
-          <select>
-            <option value='asc'>Ascedente</option>
-            <option value='desc'>Descedente</option>   
-           </select >
+          
            <select onChange={e=>handelfilterContinent(e)}>
            <option value='All'>Todos</option>
            <option value='Africa'>Africa</option>
@@ -77,11 +84,12 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
               Poblacion
           </button>
 
-           {/* <select>
-            <option value='Activity'>Actividad Turistica</option> 
-            <option value='Alfhabethic'>Alfabeticamente</option>
-            <option value='Population'>Cantidad de Poblacion </option>
-          </select> */}
+          <select onChange={e => handleOrderByName(e)}>
+            <option value="asc">Aa-Zz</option>
+            <option value="desc">Zz-Aa</option>
+          </select>
+
+          
           <Paginado
           countriesPerPage={countriesPerPage}
           allCountries={allCountries.length}

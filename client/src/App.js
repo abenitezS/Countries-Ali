@@ -1,7 +1,7 @@
 import React from 'react';  //me falto eso!!!
 import './App.css';
 import Home from '../../client/src/components/Home.js';
-import {BrowserRouter, Route, Routes } from 'react-router-dom'
+import {BrowserRouter, Route } from 'react-router-dom'
 import LandingPage from '../../client/src/components/LandingPage.js';
 
 function App() {

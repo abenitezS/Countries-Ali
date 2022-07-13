@@ -1,10 +1,9 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Countries from "./Card";
-import Activities from "./Activity";
-import { getDetail, getActivities , detailDelete} from "../../../client/src/actions/index";
-import S from '../../../client/src/styles/CardDetail.module.css';
+
+import { getDetail,  detailDelete} from "../../../client/src/actions/index";
+
 
 
 export default function CardDetail(props){
@@ -12,11 +11,11 @@ export default function CardDetail(props){
 const dispatch = useDispatch();
 const {id} = useParams();
 useEffect(()=>{
-    dispatch(getDetail(id));//esto
+    dispatch(getDetail(id));//esto!!
 },[dispatch, id])
 
 
-let detalle = useSelector((state) => state.countryDetail)//esto
+let detalle = useSelector((state) => state.countryDetail)//esto!!
 if(!detalle){
     detalle = {
         idPais: "NOT",
@@ -43,7 +42,7 @@ return(
   
     <div>
         <Link to={'/home'}>
-            <button className={S.botonVolver}>Volver</button>
+            <button >Volver</button>
         </Link>
 
 
@@ -59,7 +58,7 @@ return(
                         <h3>Población: {detalle.poblacion} habitantes</h3>
 
                         {detalle.activities?.map(e => 
-                        <div className={S.actividades} key={detalle.idPais} >
+                        <div key={detalle.idPais} >
                             <h4><u>Actividad turística:</u> {e.name}</h4>
                             <h5><u>Dificultad:</u> {e.dificultad}</h5>
                             <h5><u>Duración:</u> {e.duracion} horas</h5>

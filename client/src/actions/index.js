@@ -18,8 +18,14 @@ export function filterCountriesByContinent(payload){
 
 }
 
+//orden por alfabeto
+export function OrderByName(payload) {
+    return { type: 'ORDER_BY_NAME', payload: payload };
+  }
 
-export function ordersByPopulation(){
+
+
+export function ordersByPopulation(payload){
     
     return {
         
