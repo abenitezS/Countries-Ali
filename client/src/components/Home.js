@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getCountries,filterCountriesByContinent} from '../actions'
+import {getCountries,filterCountriesByContinent, ordersByPopulation} from '../actions'
 import {Link} from 'react-router-dom'
 import Card from '../components/Card'
 import Paginado from './Paginado'
@@ -36,8 +36,14 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
     dispatch(getCountries());
       }
 
-  function  handelfilterStatus(e){
+  function  handelfilterContinent(e){
+    e.preventDefault()
     dispatch(filterCountriesByContinent(e.target.value));
+  }
+   
+  function  handelOrderPopulation(e){
+    e.preventDefault()
+    dispatch(ordersByPopulation());
   }
    
 
@@ -48,7 +54,7 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
           <h1>PAISES DEL MUNDO </h1>
        
           
-          <button onclick={e=>handlerlClick(e)}>
+          <button onClick={e=>handlerlClick(e)}>
               Volver a cargar 
           </button>
         <div>
@@ -56,7 +62,7 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
             <option value='asc'>Ascedente</option>
             <option value='desc'>Descedente</option>   
            </select >
-           <select onChange={e=>handelfilterStatus(e)}>
+           <select onChange={e=>handelfilterContinent(e)}>
            <option value='All'>Todos</option>
            <option value='Africa'>Africa</option>
             <option value='Asia'>Asia</option>  
@@ -66,11 +72,16 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
             <option value='Oceania'>Oceania</option> 
             <option value='Europe'>Europa</option> 
            </select>
-           <select>
+
+           <button onClick={e=>handelOrderPopulation(e)}>
+              Poblacion
+          </button>
+
+           {/* <select>
             <option value='Activity'>Actividad Turistica</option> 
             <option value='Alfhabethic'>Alfabeticamente</option>
             <option value='Population'>Cantidad de Poblacion </option>
-          </select>
+          </select> */}
           <Paginado
           countriesPerPage={countriesPerPage}
           allCountries={allCountries.length}

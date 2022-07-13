@@ -17,3 +17,14 @@ export function filterCountriesByContinent(payload){
         }
 
 }
+
+
+export function ordersByPopulation(){
+    
+    return {
+        
+        type:'ORDER_BY_POPULATION',
+         payload: null
+        }
+
+}

@@ -1,5 +1,6 @@
    const initialState = {
-    countries : []
+    countries : [],
+    countriesall:[]
    }
 
 function  rootReducer (state = initialState, action) {
@@ -18,6 +19,22 @@ function  rootReducer (state = initialState, action) {
             countries: statusfiltered,              
         }
     }
+    if (action.type==='ORDER_BY_POPULATION'){ 
+        const countryOrderPopulation =  state.countriesall.sort((a,b)=>{
+            if(a.population > b.population) return 1
+            if(a.population < b.population) return -1  })
+        
+        return({
+            ...state,
+            countries:countryOrderPopulation
+           
+        })
+    }
+
+
+
+
+
      return state;
 }
 export default rootReducer;
