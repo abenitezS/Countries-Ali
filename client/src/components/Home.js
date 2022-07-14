@@ -8,11 +8,12 @@ import Paginado from './Paginado'
 
 export default function Home(){
   const dispatch= useDispatch() //para ir despachando mis acciones 
-    // esta hook es lo mismo que hacer mapdispatchToProps y traerme los prop es mas directo
-  const allCountries= useSelector(state=>state.countries)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
-    // traerme del estado cuando se monte los Paises , es lo mismo que hacer componentDidMount 
-  
-  //estados para el paginado 
+
+// esta hook es lo mismo que hacer mapdispatchToProps y traerme los prop es mas directo
+const allCountries= useSelector(state=>state.countries)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
+// traerme del estado cuando se monte los Paises , es lo mismo que hacer componentDidMount 
+const [orden,setOrden]=useState('')
+//estados para el paginado 
 const[currentPage,setCurrentPage]=useState(1)  // mi pagina actual que arranca en 1
 const[countriesPerPage,setCountriesPerPage]=useState(9) // paises por pagina siempre seran 9
 const indexOfLastCountries=currentPage * countriesPerPage //9
@@ -43,11 +44,11 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
    
   }
    
-  function  handleOrderByName(e){
+  function handleOrderByName(e){
     e.preventDefault()
     dispatch(OrderByName(e.target.value));
     setCurrentPage(1);
-    
+    setOrden(`Ordenado ${e.target.value}`) //me sirve para que modifique el estado local y se renderice
   }
 
   function  handelOrderPopulation(e){

@@ -29,8 +29,7 @@ export function ordersByPopulation(payload){
     
     return {
         
-        type:'ORDER_BY_POPULATION',
-         payload: null
-        }
+        type:'ORDER_BY_POPULATION', payload: payload
 
+        }
 }

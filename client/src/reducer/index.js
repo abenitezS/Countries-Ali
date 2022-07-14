@@ -31,12 +31,17 @@ function  rootReducer (state = initialState, action) {
         })
     }
     if (action.type==='ORDER_BY_NAME'){
-        const countryOrden = action.payload === 'asc' ? state.countriesall.sort((a,b)=>{
+        const countryOrden = action.payload === 'asc' ? 
+            state.countriesall.sort((a,b)=>{
             if(a.name.toLowerCase() > b.name.toLowerCase()) return 1
             if(a.name.toLowerCase() < b.name.toLowerCase()) return -1
-        }) : state.countriesall.sort((a,b)=>{
+            return 0;
+        }) : 
+        
+        state.countriesall.sort((a,b)=>{
             if(a.name.toLowerCase() > b.name.toLowerCase()) return -1
             if(a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+            return 0;
         })
         return({
             ...state,
