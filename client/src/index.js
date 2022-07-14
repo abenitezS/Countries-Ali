@@ -7,20 +7,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/index.js'
 
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <BrowserRouter>
-//       <React.StrictMode>
-//         <App />
-//       </React.StrictMode>
-//     </BrowserRouter>
-//   </Provider>,
-//   document.getElementById('root')
-// );
-
-
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

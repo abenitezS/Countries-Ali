@@ -7,7 +7,8 @@ import Card from '../components/Card'
 import Paginado from './Paginado'
 
 export default function Home(){
-  const dispatch= useDispatch() //para ir despachando mis acciones 
+
+const dispatch= useDispatch() //para ir despachando mis acciones 
 
 // esta hook es lo mismo que hacer mapdispatchToProps y traerme los prop es mas directo
 const allCountries= useSelector(state=>state.countries)// traeme todo lo que esta en el estado de countries y guardamenlo en allcountries
@@ -25,89 +26,86 @@ const paginado = (pageNumber)=>{  // me va a servit para el renderizado
 }
 
 
-
-  useEffect( () => {  dispatch(getCountries()); // es lo mismo que hacer mapDispatchToProps
+useEffect( () => {  dispatch(getCountries()); // es lo mismo que hacer mapDispatchToProps
     },[dispatch] );//mientras este un estado o dependencia, como no depende de nada se monta sin problema
     //para prevenite errores que me renderice la pagina si toco volver a cargar
   
+function handlerlClick(e){
+e.preventDefault();
+dispatch(getCountries());
+  }
 
+function  handelfilterContinent(e){
+e.preventDefault()
+dispatch(filterCountriesByContinent(e.target.value));
+setCurrentPage(1);
+}
+   
+function handleOrderByName(e){
+  e.preventDefault()
+  dispatch(OrderByName(e.target.value));
+  setCurrentPage(1);
+  setOrden(`Ordenado ${e.target.value}`) //me sirve para que modifique el estado local y se renderice
+}
+
+function  handelOrderPopulation(e){
+  e.preventDefault()
+  dispatch(ordersByPopulation(e.target.value));
+  setCurrentPage(1);
+  setOrden(`Ordenado ${e.target.value}`) 
   
-   function handlerlClick(e){
-    e.preventDefault();
-    dispatch(getCountries());
-      }
-
-  function  handelfilterContinent(e){
-    e.preventDefault()
-    dispatch(filterCountriesByContinent(e.target.value));
-    setCurrentPage(1);
-   
-  }
-   
-  function handleOrderByName(e){
-    e.preventDefault()
-    dispatch(OrderByName(e.target.value));
-    setCurrentPage(1);
-    setOrden(`Ordenado ${e.target.value}`) //me sirve para que modifique el estado local y se renderice
-  }
-
-  function  handelOrderPopulation(e){
-    e.preventDefault()
-    dispatch(ordersByPopulation());
-   
-  }
-  
-
-    //renderizamos 
-      return(  
-        <div> 
-          <Link to= '/countries'> Paises</Link> 
-          <h1>PAISES DEL MUNDO </h1>
-       
+}
+//renderizamos 
+return(  
+ <div> 
+      <Link to= '/countries'> Paises</Link> 
+      <h1>PAISES DEL MUNDO </h1>   
+      
+      <button onClick={e=>handlerlClick(e)}>
+          Volver a cargar 
+      </button>
+   <div>
           
-          <button onClick={e=>handlerlClick(e)}>
-              Volver a cargar 
-          </button>
-        <div>
-          
-           <select onChange={e=>handelfilterContinent(e)}>
-           <option value='All'>Todos</option>
-           <option value='Africa'>Africa</option>
-            <option value='Asia'>Asia</option>  
-            <option value='North America'>North America</option>
-            <option value='South America'>South America</option> 
-            <option value='Antartica'>Antartica</option> 
-            <option value='Oceania'>Oceania</option> 
-            <option value='Europe'>Europa</option> 
-           </select>
+    <select onChange={e=>handelfilterContinent(e)}>
+       <option value='All'>Todos</option>
+       <option value='Africa'>Africa</option>
+       <option value='Asia'>Asia</option>  
+       <option value='North America'>North America</option>
+       <option value='South America'>South America</option> 
+       <option value='Antartica'>Antartica</option> 
+       <option value='Oceania'>Oceania</option> 
+       <option value='Europe'>Europa</option> 
+     </select>
 
-           <button onClick={e=>handelOrderPopulation(e)}>
-              Poblacion
-          </button>
+     <select onClick={e=>handelOrderPopulation(e)}>
+      <label> Población</label>
+      <option>Poblacion</option>
+       <option value="asc">Ascendente</option>
+       <option value="desc">Descendente</option>
+     </select>
+     <select onChange={e => handleOrderByName(e)}>
+        <option>Alfabeticamente</option>
+        <option value="asc">Aa-Zz</option>
+        <option value="desc">Zz-Aa</option>
+      </select>
 
-          <select onChange={e => handleOrderByName(e)}>
-            <option value="asc">Aa-Zz</option>
-            <option value="desc">Zz-Aa</option>
-          </select>
-
-          
-          <Paginado
-          countriesPerPage={countriesPerPage}
-          allCountries={allCountries.length}
-          paginado={paginado}
-          />
-          {currentCountries?.map((e) => {
-              return (
-                <fragment>
-                  <Link to={"/home/"+ e.idCountry }>
-                    <Card name={e.name} bandera={e.bandera} continent={e.continent} key={e.idCountry}/>
-                  </Link>
-                </fragment>
-            )
-           })
+    <Paginado
+      countriesPerPage={countriesPerPage}
+      allCountries={allCountries.length}
+      paginado={paginado}
+      />
+      {currentCountries?.map((e) => {
+          return (
+            <div key={e.idCountry}>
+              <Link to={"/home/"+ e.idCountry }>
+                <Card name={e.name} bandera={e.bandera} continent={e.continent} />
+              </Link>
+            </div>
+        )
+        })
              }
-        </div>
-        </div>
+   </div>
+</div>
       )
-    }
+}
     

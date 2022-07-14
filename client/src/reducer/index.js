@@ -20,10 +20,17 @@ function  rootReducer (state = initialState, action) {
         }
     }
     if (action.type==='ORDER_BY_POPULATION'){ 
-        const countryOrderPopulation =  state.countriesall.sort((a,b)=>{
+        const countryOrderPopulation = action.payload === 'asc' ?
+            state.countriesall.sort((a,b)=>{
             if(a.population > b.population) return 1
-            if(a.population < b.population) return -1  })
-        
+            if(a.population < b.population) return -1  
+            return 0;
+        }) :
+        state.countriesall.sort((a,b)=>{
+            if(a.population > b.population) return -1
+            if(a.population < b.population) return 1  
+            return 0;
+        })
         return({
             ...state,
             countries:countryOrderPopulation
