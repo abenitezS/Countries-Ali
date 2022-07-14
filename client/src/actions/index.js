@@ -8,6 +8,13 @@ export function getCountries(){
     }
 }
 
+export function getNameCountry(name){
+    return asynok 
+}
+
+
+
+
 export function filterCountriesByContinent(payload){
     console.log(payload)
     return {
