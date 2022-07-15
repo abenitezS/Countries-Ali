@@ -18,6 +18,14 @@ function  rootReducer (state = initialState, action) {
                 countries: action.payload,          
             }
        }
+
+    if (action.type==='POST_ACTIVITY'){ 
+        return {
+            ...state,
+                      
+        }
+   }
+
     if (action.type==='FILTER_BY_CONTINENT'){ 
         const allCountries=state.countriesall
         const statusfiltered=action.payload==='All' ? allCountries : allCountries.filter(el=> el.continent===action.payload)

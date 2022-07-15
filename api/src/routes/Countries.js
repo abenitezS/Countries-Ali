@@ -106,6 +106,7 @@ router.get("/", async (req, res) => {
       //si no le pusieron nombre en la query 
       const countryInDB = await Country.findAll({
         include: { model: Activity },
+        order:[["name"]]
       });
       res.status(200).json(countryInDB);
     } catch (e) {

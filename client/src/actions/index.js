@@ -2,27 +2,36 @@ import axios from 'axios'
 
 export function getCountries(){
     return async function(dispatch){
-        const {data}= await axios.get('/countries');
+        const {data}= await axios.get('http://localhost:3001/countries');
         return dispatch({ type:'GET_COUNTRIES', payload:data
         })
     }
 }
 
-export function geCountriesName(name){
+
+export function postActivity(payload){
+    return async function(dispatch){
+        const data=await axios.post('http://localhost:3001/Activity',payload)
+        console.log(data)
+        return dispatch ({type:'POST_ACTIVIY',payload:data});
+    }
+}
+
+
+export function getCountriesName(name){
     return async function(dispatch){
         try {
-            const {data}=await(axios.get('/countries?name='+ name))
+            const {data}=await(axios.get('http://localhost:3001/countries?name='+ name))
             return dispatch({
                 type: "GET_NAME_COUNTRIES",
                 payload : data
             })
         } catch (error) {
-            console.log(error)
-            
-        }
-        
+            console.log(error)   
+        }      
     }
 }
+
 
 export function filterCountriesByContinent(payload){
     console.log(payload)
