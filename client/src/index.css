@@ -1,12 +1,18 @@
 body {
- background-image:url( 'https://static6.depositphotos.com/1092937/587/i/450/depositphotos_5875268-stock-photo-blue-sky.jpg');
- background-size: contain;
   margin: 0;
+  height: 100vh;
+   /* background-color:  #caf0f8;  */
+   background-image: url('https://www.passionateinmarketing.com/wp-content/uploads/2021/09/Quantumcomputing-weatherforecast.jpg');
+   background-repeat: no-repeat;
+   background-size: cover ;
+   background-position: center bottom;
+
+
+
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
