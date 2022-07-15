@@ -2,9 +2,25 @@ import axios from 'axios'
 
 export function getCountries(){
     return async function(dispatch){
-        const {data}= await axios.get('http://localhost:3001/countries');
+        const {data}= await axios.get('/countries');
         return dispatch({ type:'GET_COUNTRIES', payload:data
         })
+    }
+}
+
+export function geCountriesName(name){
+    return async function(dispatch){
+        try {
+            const {data}=await(axios.get('/countries?name='+ name))
+            return dispatch({
+                type: "GET_NAME_COUNTRIES",
+                payload : data
+            })
+        } catch (error) {
+            console.log(error)
+            
+        }
+        
     }
 }
 
